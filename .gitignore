@@ -1,0 +1,5 @@
+# Project exclude paths
+/flink/target/
+/flume/target/
+/kafka/target/
+/target/
