@@ -3,3 +3,6 @@
 /flume/target/
 /kafka/target/
 /target/
+
+.idea
+*.iml
