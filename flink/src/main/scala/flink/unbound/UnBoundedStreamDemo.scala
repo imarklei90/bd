@@ -8,13 +8,15 @@ import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
  * @author Lei
  * @date 2021/3/26
  */
-object UnBoundedStreamDeml {
+object UnBoundedStreamDemo {
 
   def main(args: Array[String]): Unit = {
 
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 
     import org.apache.flink.api.scala._
+
+    env.sockT
 
     env.readTextFile("data")
       .flatMap(_.split(""))
