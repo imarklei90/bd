@@ -45,7 +45,7 @@ object RedisSink {
     /**
      * 从参数指定的信息中获取key
      * @param t
-     * @return
+     * @returnS
      */
     override def getKeyFromData(t: String): String = {
       return t.toString
