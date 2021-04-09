@@ -12,6 +12,7 @@
         <module>kafka</module>
         <module>flume</module>
         <module>flink</module>
+        <module>UserBehaviorAnalysis</module>
     </modules>
 
     <dependencies>

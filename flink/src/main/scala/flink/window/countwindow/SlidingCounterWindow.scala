@@ -1,15 +1,14 @@
-package flink.window
+package flink.window.countwindow
 
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-import org.apache.flink.streaming.api.windowing.time.Time
 
 /**
- * Window - CounterWindow - Tumbling
+ * Window - CounterWindow - Sliding
  *
  * @author Lei
  * @date 2021/4/1
  */
-object TumblingCounterWindow_Tumbling {
+object SlidingCounterWindow {
 
   def main(args: Array[String]): Unit = {
 
@@ -17,15 +16,15 @@ object TumblingCounterWindow_Tumbling {
 
     env.socketTextStream("localhost", 7777)
       .filter(_.nonEmpty)
-      .map( person => {
+      .map(person => {
         val personArr: Array[String] = person.split(",")
         (personArr(0), personArr(1).toInt, personArr(2))
       })
       .keyBy(0)
-      .countWindow(3)
+      .countWindow(3, 2)
       .maxBy(1)
       .print()
-    
+
     env.execute(this.getClass.getSimpleName)
   }
 

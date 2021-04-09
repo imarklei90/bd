@@ -1,10 +1,11 @@
 package flink.window.function
 
+import org.apache.flink.api.java.tuple.Tuple
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction
 import org.apache.flink.streaming.api.windowing.time.Time
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
-import org.apache.spark.sql.catalyst.expressions.aggregate.AggregateFunction
 
 /**
  * ProcessFunction
@@ -31,13 +32,19 @@ object TumblingTimeWindow_process {
     env.execute(this.getClass.getSimpleName)
   }
 
-  private class MyProcessFunction extends ProcessWindowFunction{
+  /**
+   * IN: 待处理的DataStream中每个元素的类型
+   * OUT: 输出的DataStream中每个元素的类型
+   * KEY: KeyBy中指定的Key的类型
+   * W: 窗口的类型
+   */
+  private class MyProcessFunction extends ProcessWindowFunction[String, Int, Tuple, TimeWindow]{
     /**
      * 窗口关闭时，process会被触发执行
-     * @param key
-     * @param context
-     * @param elements
-     * @param out
+     * @param key ID
+     * @param context 窗口的上下文实例
+     * @param elements 窗口中带计算的元素
+     * @param out 输出结果DataStream
      */
     override def process(key: Nothing, context: Context, elements: Iterable[Nothing], out: Collector[Nothing]): Unit = {
 
